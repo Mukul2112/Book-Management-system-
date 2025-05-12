@@ -1,0 +1,679 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F4F5F7;
+    display: flex;
+    height: 100vh;
+    flex-direction: column; /* Adjusted for responsiveness */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fafbfc;
+    color: black;
+    padding: 20px;
+    height: 100vh;
+    position: fixed; /* Make the sidebar fixed */
+}
+
+.sidebar .logo img {
+    width: 120px;
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: rgb(14, 13, 13);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar .support {
+    margin-top: auto;
+}
+
+.sidebar .support a {
+    text-decoration: none;
+    color: rgb(12, 12, 12);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.main-content {
+    flex-grow: 1;
+    margin-left: 250px; /* Leave space for the fixed sidebar */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Top navigation bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* Fix for search icon */
+}
+
+.top-nav input[type="search"] {
+    padding: 10px 10px 10px 40px; /* Add padding to the left for icon */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%; /* Set width to 100% for responsiveness */
+    max-width: 300px;
+    font-size: 14px;
+}
+
+.top-nav .search-container i {
+    position: absolute;
+    left: 10px; /* Correct icon placement inside input */
+    color: #999;
+}
+
+.top-nav .user-profile {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    padding: 5px 15px;
+    border-radius: 33px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.top-nav .user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Frame 63 styles */
+.frame-63 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 9px;
+    position: absolute;
+    width: 180px;
+    height: 20px;
+    left: 280px; /* Adjust left position based on your layout */
+    top: 132px; /* Adjust top position based on your layout */
+}
+
+/* Frame 57 styles */
+.frame-57 {
+    position: absolute;
+    width: 273px;
+    height: 350px;
+    left: 280px;
+    top: 172px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+}
+
+/* Rectangle 19 styles */
+.rectangle-19 {
+    position: absolute;
+    width: 209px;
+    height: 277px;
+    left: 32px;
+    top: 24px;
+    background: url("https://m.media-amazon.com/images/I/81F90H7hnML._AC_UF1000,1000_QL80_.jpg") no-repeat center center; /* Adjust the path as needed */
+    background-size: cover; /* Ensures the image covers the div */
+    border-radius: 10px; /* Optional: rounding the corners */
+}
+
+.book {
+    width: 270px;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: #ffffff;
+}
+
+.book img {
+    width: 110px;
+    height: 160px;
+    margin-bottom: 10px;
+    border-radius: 1px;
+}
+
+.book p {
+    font-size: 14px;
+    color: #2D3748;
+    margin-top: 10px;
+}
+
+/* Icon Styles */
+.icon {
+    position: absolute;
+    width: 193px;
+    height: 52px;
+    left: 40px;
+    top: 328px;
+}
+
+/* "Don't Make Me Think" Styling */
+.book-title {
+    width: 900px;
+    height: 14px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 128.52%;
+    color: #4D4D4D;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.book-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.author {
+    width: 288px;
+    height: 30px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #4D4D4D;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.edition {
+    width: 183px;
+    height: 14px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #9A9A9A;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+.star-rating {
+    /* Stars */
+
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 3px;
+
+width: 82px;
+height: 12px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+.star-rating i {
+    color: #FFD700; /* Star color */
+}
+
+.new-div {
+    position: absolute;
+    width: 274px;
+    height: 297px;
+    left: 280px; /* Adjust left position based on your layout */
+    top: 624px; /* Adjust top position based on your layout */
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px; /* Added padding for content spacing */
+    text-align: center; /* Center-align the content */
+}
+
+/* Image 3 Styles */
+.image-3 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 34px;
+    top: 71px;
+    background: url('https://yt3.googleusercontent.com/cT40lDWqE99Ch52R3ftuAExjmjF-yZiY5rUSv_0Q3NXhcqzmiax8ReXuS4Qe53Fizcaw4hEX=s900-c-k-c0x00ffffff-no-rj') no-repeat center center; /* Adjust the path as needed */
+    background-size: cover; /* Ensures the image covers the div */}
+    /* Buy Now */
+.buy{
+position: absolute;
+width: 149px;
+height: 14px;
+left: 85px;
+top: 20px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 19px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-decoration-line: underline;
+
+color: #4D4D4D;
+}
+.now{position: absolute;
+width: 149px;
+height: 14px;
+left: 85px;
+top: 10px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 19px;
+/* or 125% */
+display: flex;
+align-items: center;
+text-decoration-line: underline;
+
+color: #4D4D4D;}
+/* Image 2 Styles */
+.image-2 {
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    left: 39px;
+    top: 150px;
+    background: url('https://images.easyfundraising.org.uk/retailer/cropped/amazon.png') no-repeat center center; /* Adjust the path as needed */
+    background-size: cover; /* Ensures the image covers the div */
+}
+/* Availability styles */
+.availability {
+position: absolute;
+width: 132px;
+height: 16px;
+left: 33%;
+top: 310px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+
+color: #4D4D4D;
+}
+.Hard {
+position: absolute;
+width: 132px;
+height: 16px;
+left: 33%;
+top: 330px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+
+color: #4D4D4D;
+}
+.ebook{
+position: absolute;
+width: 132px;
+height: 16px;
+left: 33%;
+top: 350px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+
+color: #4D4D4D;
+}
+.Audio {
+position: absolute;
+width: 132px;
+height: 16px;
+left: 33%;
+top: 370px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+
+color: #4D4D4D;
+}
+/* Rectangle 20 */
+.borrow{
+position: absolute;
+width: 209px;
+height: 61px;
+left: 32%;
+top: 420px;
+
+background: #F27851;
+border-radius: 5px;}
+.orange{/* Group 29 */
+
+position: absolute;
+width: 188px;
+height: 48px;
+left: 70px;
+top: 20px;
+}
+.text{
+/* BORROW */
+
+position: absolute;
+width: 188px;
+height: 10px;
+left: -1px;
+top: 6px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 12px;
+/* or 60% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+}
+.status{
+/* Status */
+
+position: absolute;
+width: 132px;
+height: 16px;
+left: 50%;
+top: 310px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+
+color: #4D4D4D;
+}
+.shelf{
+/* Rectangle 20 */
+
+position: absolute;
+width: 209px;
+height: 61px;
+left: 49%;
+top: 420px;
+
+background: #41B64D;
+border-radius: 5px;
+
+}
+.shelff{
+/* Group 29 */
+
+position: absolute;
+width: 100px;
+height: 48px;
+left: 35%;
+top: 25px;
+}
+.author{
+/* Frame 58 */
+
+position: absolute;
+width: 445px;
+height: 418px;
+left: 1390px;
+top: 172px;
+
+background: #FFFFFF;
+border-radius: 10px;
+}
+.font{
+position: absolute;
+width: 188px;
+height: 10px;
+left: 10px;
+top: 15px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 12px;
+/* or 60% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #41B64D;
+
+}
+.author-name{
+position: absolute;
+width: 188px;
+height: 10px;
+left: 10px;
+top: 60px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 12px;
+/* or 60% */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #040404;
+}
+.author-photo{
+position: absolute;
+width: 29px;
+height: 29px;
+left: 220px;
+top: 1px;
+background-size: small; 
+}
+.about-author{
+position: absolute;
+width: 188px;
+height: 10px;
+left: 10px;
+top: 220px;
+
+/*font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 12px;
+/* or 60% */
+display: flex;
+align-items: center;
+text-align: justify;
+
+color: #040404;
+}
+.details{/* Book Details */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 507px;
+height: 600px;
+left: 600px;
+top: 620px;
+
+background: #FFFFFF;
+border: 1px solid #f9f7f7;
+border-radius: 10px;
+}
+.add{
+/* Book Details */
+
+position: absolute;
+width: 133px;
+height: 27px;
+left: 40px;
+top: 29px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 27px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #4D4D4D;
+}
+.publish{
+/* Published in */
+position: absolute;
+width: 102px;
+height: 200px;
+left: 40px;
+top: 15px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 17px;
+line-height: 27px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #4D4D4D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+.notes{
+/*dition Notes */
+position: absolute;
+width: 150px;
+height: 17px;
+left: 40px;
+top: 170px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 25px;
+line-height: 17px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+color: #4D4D4D;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+.series{
+/* dl */
+position: absolute;
+width: 747px;
+height: 48px;
+left: 40px;
+top: 200px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+.contri{/* dl */
+
+position: absolute;
+width: 488px;
+height: 100px;
+left: 40px;
+top: 280px;
+
+}
+.physical{/* dl */
+
+position: absolute;
+width: 390px;
+height: 86px;
+left: 40px;
+top: 400px;
+
+}
+.number{/* dl */
+
+    position: absolute;
+    width: 413px;
+    height: 158px;
+    left: 40px;
+    top: 480px;
+    
+}

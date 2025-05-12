@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Tracker</title>
+    <!-- Bootstrap Icons CSS -->
+   
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        }
+        
+        *::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        
+    
+    body {
+        
+        font-family: 'Arial', sans-serif;
+        background-color: #F4F5F7;
+        display: flex;
+        height: 100vh;
+        flex-direction: column; /* Adjusted for responsiveness */
+    }
+    /* Add this in your CSS */
+.hover-effect {
+transition: transform 0.3s ease;
+}
+
+.hover-effect:hover {
+transform: scale(1.1);
+}
+
+    .sidebar {
+        width: 250px;
+        background-color: #fafbfc;
+        color: black;
+        padding: 20px;
+        height: 100vh;
+        position: fixed; /* Make the sidebar fixed */
+    }
+    
+    .sidebar .logo img {
+        width: 120px;
+        margin-bottom: 40px;
+    }
+    .sidebar ul {
+        list-style: none;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 20px;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: rgb(14, 13, 13);
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar ul li a i {
+        margin-right: 10px; /* Space between icon and text */
+    }
+
+    .sidebar .support {
+        margin-top: auto;
+    }
+
+    .sidebar .support a {
+        text-decoration: none;
+        color: rgb(12, 12, 12);
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .main-content {
+        flex-grow: 1;
+        margin-left: 250px; /* Leave space for the fixed sidebar */
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    /* Top navigation bar */
+    .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        position: relative;
+    }
+    
+    .search-container {
+        display: flex;
+        align-items: center;
+        position: relative; /* Fix for search icon */
+    }
+
+    .top-nav input[type="search"] {
+        padding: 10px 10px 10px 40px; /* Add padding to the left for icon */
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        width: 100%; /* Set width to 100% for responsiveness */
+        max-width: 300px;
+        font-size: 14px;
+    }
+
+    .top-nav .search-container i {
+        position: absolute;
+        left: 10px; /* Correct icon placement inside input */
+        color: #999;
+    }
+    
+    .top-nav .user-profile {
+        display: flex;
+        align-items: center;
+        background: #FFFFFF;
+        padding: 5px 15px;
+        border-radius: 33px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    }
+    
+    .top-nav .user-profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    /* New Arrivals */
+    .new-arrivals {
+        margin-bottom: 30px;
+    }
+
+    .new-arrivals h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .carousel {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .carousel img {
+        width: 110px;
+        height: 160px;
+        border-radius: 10px;
+    }
+
+    .carousel img {
+        display: none;
+    }
+    
+    .carousel img.active {
+        display: block;
+    }
+    
+    /* Recommended section */
+    .recommended-section {
+        margin-bottom: 30px;
+    }
+
+    .recommended-section h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .book-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusts column width */
+        gap: 15px;
+        padding: 10px; /* Optional padding around the grid */
+        overflow: hidden; /* Hide scrollbars */
+    }
+    
+
+    .book {
+        text-align: center;
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .book img {
+        width: 110px;
+        height: 160px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .book p {
+        font-size: 14px;
+        color: #2D3748;
+        margin-top: 10px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        body {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .main-content {
+            margin-left: 0;
+        }
+
+        .carousel img, .book img {
+            width: 90px;
+            height: 130px;
+        }
+
+        .top-nav input[type="search"] {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .book {
+            padding: 10px;
+        }
+
+        .carousel img, .book img {
+            width: 80px;
+            height: 120px;
+        }
+
+        .top-nav {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .top-nav .user-profile {
+            margin-top: 10px;
+        }
+    }
+
+</style>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="/images/logo.jpeg" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="#"><i class="bi bi-house"></i> Home</a></li>
+            <li><a href="#"><i class="bi bi-search"></i> Search</a></li>
+            <li><a href="#"><i class="bi bi-book"></i> My Shelf</a></li>
+            <li><a href="#"><i class="bi bi-plus-circle"></i> Contribute</a></li>
+        </ul><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="support">
+            <a href="#">About</a>
+            <a href="#">Support</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="search" id="search-bar" placeholder="Search">
+            </div>
+            <div class="user-profile">
+                <img src="C:\Users\singl\OneDrive\Desktop\WhatsApp Image 2024-10-22 at 20.37.18_37bf1b9a.jpg" alt="User Profile">
+            
+                <span>Kenson</span>
+            </div>
+        </div>
+
+        <!-- New Arrivals -->
+        <div class="new-arrivals">
+            <h2>New Arrivals</h2>
+            <div class="carousel">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnx2fRPHm5lx4g1epzi5yKTWld5xeqh8N7vw&s" alt="Holy Bible">
+                <img src="https://ew.com/thmb/MaxHBP4uhvg9_3eNeWgx_SOSku0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/9781408855669-6cfb2099b6e84a4899ce368d6facc242.jpg" alt="Harry Potter">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57_nUpx4iHmOE9GASqzdODTqiF1kEnI8K_w&s" alt="Lean UX">
+                <img src="https://m.media-amazon.com/images/I/61hgWFcZuzL._UF1000,1000_QL80_.jpg" alt="React">
+            </div>
+        </div>
+
+        <!-- Recommended Section -->
+        <div class="recommended-section">
+            <h2>Good Morning, 
+                <br>Recommended for You</h2>
+            <div class="book-list">
+                <div class="book">
+                    <a href="atmoic.html" target="_blank">
+
+                    <img src="https://m.media-amazon.com/images/I/81F90H7hnML._AC_UF1000,1000_QL80_.jpg" alt="Atomic Habits"></a>
+                    <p>Atomic Habits</p>
+                    
+                </div>
+               
+                
+                    <% for(let book of alllisting) { %>
+                    <div class="book" >
+                        <a href=" home/<%= book._id %>" >
+                            <img src="<%= book.imagelink %>" alt="<%= book.title %>">
+                        </a>
+                        <p><%= book.name %></p>
+                    </div>
+                <% }; %>
+                <div class="book">
+                    <a href="million.html" target="_blank">
+                    <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsfxrcUtlaLqSTTpA7N9cWKIopvRNtXngM2A&s alt="A Million to One">
+                 </a>
+                    <p>A Million to One </p>
+                </div>
+                <div class="book">
+                    <img src=https://m.media-amazon.com/images/I/81Yyys78PsL._UF1000,1000_QL80_.jpg alt="The End of the Fucking World ">
+                    <p>The End of the Fucking World </p>
+                </div>
+                <div class="book">
+                    <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMDqH-yVb7C_WyKQ13nYIYP44tsFVO0GwgNw&s alt="Around the World in 80 Days">
+                    <p>Around the World in 80 Days</p>
+                </div>
+                <div class="book">
+                    <img src="https://images.meesho.com/images/products/396738286/psbxy_512.jpg" alt="I Don't Love You Anymore">
+                    <p>I Don't Love You Anymore</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71xoeW8+ebL._AC_UF1000,1000_QL80_.jpg" alt="Oliver Twist">
+                    <p>Oliver Twist</p>
+                </div>
+                <div class="book">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj8ZXbz1NijBjFTxNav-MsU1MvT2mwszvoAg&s" alt="The Hobbit">
+                    <p>The Hobbit</p>
+                </div>
+              
+                <div class="book">
+                    <img src=https://m.media-amazon.com/images/I/81gTwYAhU7L._AC_UF1000,1000_QL80_.jpg alt="power of your subconsious mind">
+                    <p>power of your subconsious mind</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71hvVPz9rrL._AC_UF1000,1000_QL80_.jpg" alt="the story of my life">
+                    <p>the story of my lifet</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71B4h-dSVzL._AC_UF1000,1000_QL80_.jpg" alt="energize your mind">
+                    <p>energize your mind</p>
+                </div>
+                <div class="book">
+                    <img src="https://media.npr.org/assets/img/2021/08/16/81laymbisll_custom-3672cf847e374ab050b21d1ab215772a6ddc14fc.jpeg?s=1100&c=50&f=jpeg" alt="The Poppy War">
+                    <p>The Poppy War</p>
+                </div>
+                <div class="book">
+                    <img src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/02/41i6Sz7m0L._SX331_BO1204203200_-e1486419918291.jpg?auto=format&q=60&fit=max&w=930" alt="The Girl With All The Gifts">
+                    <p>The Girl With All The Gifts</p>
+                </div><div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61y7qoYEQnL._UF1000,1000_QL80_.jpg" alt="Blood Mark">
+                    <p>Blood Mark</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/91aER-HU-7L._AC_UF1000,1000_QL80_.jpg" alt="ROAD NOT TAKEN">
+                    <p>ROAD NOT TAKEN</p>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <!-- Recent Readings Section -->
+        <div class="recent-readings">
+            <h2>Frontend Enginnering</h2>
+            <div class="book-list">
+                
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61CGBSrQwrL._AC_UF1000,1000_QL80_.jpg" alt="Mastering Full Stack Development">
+                    <p>Mastering Full Stack Development</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81nT0czkv5L._AC_UF1000,1000_QL80_.jpg" alt="Building Micro-Frontends">
+                    <p>Building Micro-Frontends</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71Tj-NOm27L._UF1000,1000_QL80_.jpg" alt="Cracking Top Tech Frontend Interviews 2024">
+                    <p>Cracking Top Tech Frontend Interviews 2024</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61trUBCleiL._UF1000,1000_QL80_.jpg" alt="Mastering Front-End Web Development">
+                    <p>Mastering Front-End Web Development</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/616UPvYQUHL._AC_UF1000,1000_QL80_.jpg" alt="CSS & CSS3: 20 Lessons to Successful Web Development">
+                    <p>CSS & CSS3: 20 Lessons to Successful Web Development</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81u6I8K-okL._AC_UF1000,1000_QL80_.jpg" alt="Beginning HTML and CSS : Rob Larsen">
+                    <p>Beginning HTML and CSS : Rob Larsen</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71ZaxBEyvxL._AC_UF1000,1000_QL80_.jpg" alt="Modern Frontend Development with Node.js">
+                    <p>Modern Frontend Development with Node.js</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51eQekkEKoL._AC_UF350,350_QL50_.jpg" alt="React.js For Beginners">
+                    <p>React.js For Beginners</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61vUxCt6KyL._AC_UF1000,1000_QL80_.jpg" alt="Learning Web Development with React and Bootstrap">
+                    <p>Learning Web Development with React and Bootstrap</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71jfHilAwtL._AC_UF1000,1000_QL80_.jpg" alt="React: The Comprehensive Guide Book">
+                    <p>React: The Comprehensive Guide Book</p>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="recent-readings">
+            <h2>Science</h2>
+            <div class="book-list">
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71pifG08RFL._AC_UF1000,1000_QL80_.jpg" alt="THE SCIENCE BOOK ">
+                    <p>THE SCIENCE BOOK </p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71VhdMMqLwL._AC_UF1000,1000_QL80_.jpg" alt="Reignited: Scientific Pathways to a Brighter Future">
+                    <p>Reignited: Scientific Pathways to a Brighter Future</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81xbOzQNXtL._AC_UF1000,1000_QL80_.jpg" alt="Fundamentals of Solidification 5th edition">
+                    <p>Fundamentals of Solidification 5th edition</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71DbjDs4B0L._AC_UF1000,1000_QL80_.jpg" alt="The Principles of Scientific Management (Forgotten Books)">
+                    <p>The Principles of Scientific Management (Forgotten Books)</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61zLGi9cT9L._AC_UF1000,1000_QL80_.jpg" alt="The Scientific Outlook : Bertrand, Russell">
+                    <p>The Scientific Outlook : Bertrand, Russell</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71Quf9MoZ6L._AC_UF1000,1000_QL80_.jpg" alt="Catalogue of the Scientific Books in the Library of the Royal Society">
+                    <p>Catalogue of the Scientific Books in the Library of the Royal Society</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/416qs3az1WL._AC_UF1000,1000_QL80_.jpg" alt="Thermal Analysis: Comparative Study of Materials">
+                    <p>Thermal Analysis: Comparative Study of Materials</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81ymN8ZLOUL._AC_UF1000,1000_QL80_.jpg" alt="Women in Science : IGNOTOFSKY, RACHEL">
+                    <p>Women in Science : IGNOTOFSKY, RACHEL</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81TbRcCiTZL._AC_UF1000,1000_QL80_.jpg" alt="The Whys of a Scientific Life">
+                    <p>The Whys of a Scientific Life</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61MreI12aiL._AC_UF1000,1000_QL80_.jpg" alt="Editing Scientific Books and Journals : O'Connor">
+                    <p>Editing Scientific Books and Journals : O'Connor</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61Lr1trMpJL._AC_UF1000,1000_QL80_.jpg" alt="Scientific Irrationalism (Broken Science Books)">
+                    <p>Scientific Irrationalism (Broken Science Books)</p>
+                </div>
+
+            </div>
+        </div><br>
+        <div class="recent-readings">
+            <h2>Children</h2>
+            <div class="book-list">
+                <div class="book">
+                    <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTYcy-k0cP4kkkxWDjj-TY1vYoYxaAjbvkCr70sb4sPDtrCQz_o7LjMr--fKvplUbf4NZCRC3P7oqMFWmID_ZKx4U7t6P6f-D0cyBYxbejSf4Dlc9a1sgoE5w&usqp=CAc" 
+                    alt="The Kid Who Came From Space">
+                    <p>The Kid Who Came From Space </p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51HM1f6P2tL._SX342_SY445_.jpg" alt="THE KOALA WHO COULD">
+                    <p>THE KOALA WHO COULD</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51Rmi3vU1HL._SY445_SX342_.jpg" alt="The Magic Of The Lost Temple">
+                    <p>The Magic Of The Lost Temple</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51etdOT4GDL._SX342_SY445_.jpg" alt="Grumpy Monkey">
+                    <p>Grumpy Monkey</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/519ANOP2QeL._SX342_SY445_.jpg" alt="I Love You to the Moon And Back">
+                    <p>I Love You to the Moon And Back</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/516XZcKx0cL._SX342_SY445_.jpg" alt="Different--A Great Thing to Be!">
+                    <p>Different--A Great Thing to Be!</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/91--h58usyL._SY342_.jpg" alt="The Day You Begin">
+                    <p>The Day You Begin</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51g3ODeyShL._SX342_SY445_.jpg" alt="The Mysteries of the Universe">
+                    <p>The Mysteries of the Universe</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71BXMB8-ZwL._SY342_.jpg" alt="GIRAFFES CAN'T DANCE">
+                    <p>GIRAFFES CAN'T DANCE</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/417ardbYynL._SY445_SX342_.jpg" alt="Fantastic Mr Fox ">
+                    <p>Fantastic Mr Fox </p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81YRlhnJvgL._SY342_.jpg" alt="FAMOUS FIVE ">
+                    <p>FAMOUS FIVE </p>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="recent-readings">
+            <h2>Mathematics</h2>
+            <div class="book-list">
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/41M8oiA7cIL._SY445_SX342_.jpg" 
+                    alt="Exploring Geometry ">
+                    <p>Exploring Geometry  </p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71JSjocnDdL._SY342_.jpg" alt="MAN WHO KNEW INFINITY">
+                    <p>MAN WHO KNEW INFINITY</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51Rmi3vU1HL._SY445_SX342_.jpg" alt="The Magic Of The Lost Temple">
+                    <p>The Magic Of The Lost Temple</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/51dUoVfRi8L._SY445_SX342_.jpg" alt="The Great Indian Mathematicians">
+                    <p>The Great Indian Mathematicians</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/515873lOhTL._SX342_SY445_.jpg" alt="The Maths Book">
+                    <p>The Maths Book</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/41uo4UkGchL._SY445_SX342_.jpg" alt="50 Greatest Mathematicians of the World">
+                    <p>50 Greatest Mathematicians of the World</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81UrSFqLh6L._SY342_.jpg" alt="The Secret Lives of Numbers">
+                    <p>The Secret Lives of Numbers</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71-F8NK-DvL._SY342_.jpg" alt="The Princeton Companion to Mathematics">
+                    <p>The Princeton Companion to Mathematics</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/4135KMCxfYL._SY445_SX342_.jpg" alt="Men Of Mathematics">
+                    <p>Men Of Mathematics</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/41B9-jHjDdL._SY445_SX342_.jpg" alt="The Joy of Mathematics ">
+                    <p>The Joy of Mathematics</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/91Raghh9VfL._SY342_.jpg" alt="Mathematical Thinking ">
+                    <p>Mathematical Thinking </p>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="recent-readings">
+            <h2>World History</h2>
+            <div class="book-list">
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/713jIoMO3UL._SY342_.jpg" 
+                    alt="Sapiens (L) ">
+                    <p>Sapiens (L)  </p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/511A0Zj1jpL._SX342_SY445_.jpg" alt="Knowledge Encyclopedia - World History">
+                    <p>Knowledge Encyclopedia - World History</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81xogn0Q4LL._SY342_.jpg" alt="The Golden Road">
+                    <p>The Golden Road</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71ZGS5OEPhS._SY342_.jpg" alt="A Short History of the World by H.G. Wells">
+                    <p>A Short History of the World by H.G. Wells</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/81MASdEXNWL._SY342_.jpg" alt="Mastering Modern World History">
+                    <p>Mastering Modern World History</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/A15++jTYXJL._SY342_.jpg" alt="The Silk Roads: A New History of the World">
+                    <p>The Silk Roads: A New History of the World</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/41stchzvwwL._SX342_SY445_.jpg" alt="History of The World: Vishwa Ka Itihas">
+                    <p>History of The World: Vishwa Ka Itihas</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71XsfYKj09L._SY342_.jpg" alt="History of World Civilisation">
+                    <p>History of World Civilisation</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/91b+5xdFMBL._SY342_.jpg" alt="Ancient Rome: The Rise and Fall of an Em">
+                    <p>Ancient Rome: The Rise and Fall of an Em</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/71+qFNOI5gL._SY342_.jpg" alt="The Penguin History of the World ">
+                    <p>The Penguin History of the World</p>
+                </div>
+                <div class="book">
+                    <img src="https://m.media-amazon.com/images/I/61-FPe0SxnL._SX342_SY445_.jpg" alt="History of the World Map by Map ">
+                    <p>History of the World Map by Map </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

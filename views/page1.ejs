@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f9;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background with a diagonal split using gradient from green to black */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom right, #26A96C, #395E66); /* Gradient from green to darker shade */
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: -1;
+        }
+
+        .background::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            top: 0;
+            left: 0;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            flex-direction: column;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .logo {
+            max-width: 80px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            padding-left: 45px; /* Space for icon */
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .remember-me {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .remember-me label {
+            margin-left: 5px;
+        }
+
+        .remember-forgot a {
+            color: #1db954;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1db954;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            background-color: #178a44;
+        }
+
+        .bottom-text {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .bottom-text a {
+            color: #1db954;
+            text-decoration: none;
+        }
+
+        .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .login-container {
+                max-width: 100%;
+                padding: 30px;
+                margin: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .input-group {
+                margin-bottom: 10px;
+            }
+
+            .login-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .bottom-text {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            .login-btn {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .bottom-text {
+                font-size: 11px;
+            }
+
+            .bottom-text span {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="login-container">
+        <img src="/images/logo.jpeg" alt="Library Logo" class="logo">
+        <h2>Welcome Back!</h2>
+        <p>Sign in to continue to your Digital Library</p>
+
+        <form id="loginForm" method="post" action="/login">
+            
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="username@collegename.ac.in" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="********" required>
+            </div>
+
+            <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="bottom-text">
+            <span>New User? <a href="/register">Register Here</a></span>
+            <span><a href="#">Use as Guest</a></span>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

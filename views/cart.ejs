@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Tracker</title>
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            background-color: #fff;
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar .logo img {
+            width: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .sidebar ul li a {
+            color: rgb(12, 12, 12);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .sidebar ul li a:hover {
+            color: #007bff;
+        }
+        .sidebar .support a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .sidebar .support a:hover {
+            height: 1000px;
+            color: #007bff;
+        }
+
+        /* Main content area */
+        .spa {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .spa h1 {
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+        }
+        .spa h4 {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Card and row styles */
+        .row33 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .col-md-82 {
+            flex: 1;
+        }
+        .cardo {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cardo-body .row {
+            display: flex;
+            gap: 10px;
+        }
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .btn-danger {
+            color: white;
+            background-color: #dc3545;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* Payment section */
+        .payment {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment h1 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .cart-description {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #666;
+            text-align: left;
+        }
+        .cart-description button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .cart-description button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img src="/images/logo.jpeg" alt="Logo">
+    </div>
+    <ul>
+        <li><a href="/home"><i class="bi bi-house"></i> Home</a></li>
+        <li><a href="#"><i class="bi bi-search"></i> Search</a></li>
+        <li><a href="#"><i class="bi bi-book"></i> My Shelf</a></li>
+        <li><a href="#"><i class="bi bi-plus-circle"></i> Contribute</a></li>
+    </ul>
+    <!-- <div class="support">
+        <a href="#">About</a>
+        <a href="#">Support</a>
+        <a href="#">Terms & Conditions</a>
+    </div> -->
+</div>
+
+<div class="spa">
+    <h1>YOUR BAG</h1>
+    <h4>ADD 1000 FOR FREE SHOPPING</h4>
+    <div class="row33">
+        <div class="col-md-82">
+            <div class="cardo">
+                <div class="cardo-body">
+                    <% if(cartItems.length === 0) { %>
+                        <p>Your cart is empty.</p>
+                    <% } else { %>
+                        <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+                            <% for(let listing of cartItems) { %>
+                                <div class="card col">
+                                    <img src="<%= listing.imagelink %>" class="card-img-top" alt="listing image" style="height: 20rem;">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <b><%= listing.name %></b><br>
+                                            <%= listing.quantity_ml %>ml<br>
+                                            <p style="display: inline-block;">&#8377;</p>
+                                            <p style="display: inline-block;" id="item_price"><%= listing.price%></p><br>
+                                        </p>
+                                        <form method="post" action="/cart/<%= listing._id %>?_method=DELETE">
+                                            <button class="btn btn-danger">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="payment">
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let totalAmount = 0;
+                const prices = document.querySelectorAll("#item_price");
+                prices.forEach(price => {
+                    totalAmount += parseFloat(price.textContent);
+                });
+                document.getElementById("answer").textContent = totalAmount;
+            });
+        </script>
+        <h1>Total amount is:&#8377;<p style="display: inline-block;" id="answer"></p></h1>
+        <div class="cart-description">
+            <h2>Cart Description</h2>
+            <p>Your cart contains a selection of premium skincare products. Review your items and proceed to checkout when you're ready. Enjoy free shipping on orders over ₹1000!</p>
+            <button>BUY Now</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

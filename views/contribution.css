@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+    
+    *::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+    
+
+body {
+    
+    font-family: 'Arial', sans-serif;
+    background-color: #F4F5F7;
+    display: flex;
+    height: 100vh;
+    flex-direction: column; /* Adjusted for responsiveness */
+}
+/* Add this in your CSS */
+.hover-effect {
+transition: transform 0.3s ease;
+}
+
+.hover-effect:hover {
+transform: scale(1.1);
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fafbfc;
+    color: black;
+    padding: 20px;
+    height: 100vh;
+    position: fixed; /* Make the sidebar fixed */
+}
+
+.sidebar .logo img {
+    width: 120px;
+    margin-bottom: 40px;
+}
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: rgb(14, 13, 13);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.sidebar .support {
+    margin-top: auto;
+}
+
+.sidebar .support a {
+    text-decoration: none;
+    color: rgb(12, 12, 12);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.main-content {
+    flex-grow: 1;
+    margin-left: 250px; /* Leave space for the fixed sidebar */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Top navigation bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* Fix for search icon */
+}
+
+.top-nav input[type="search"] {
+    padding: 10px 10px 10px 40px; /* Add padding to the left for icon */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%; /* Set width to 100% for responsiveness */
+    max-width: 300px;
+    font-size: 14px;
+}
+
+.top-nav .search-container i {
+    position: absolute;
+    left: 10px; /* Correct icon placement inside input */
+    color: #999;
+}
+
+.top-nav .user-profile {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    padding: 5px 15px;
+    border-radius: 33px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.top-nav .user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+/* Rectangle 31 */
+.box{
+position: absolute;
+width: 678px;
+height: 562px;
+left: 270px;
+top: 150px;
+
+background: #FFFFFF;
+border-radius: 10px;
+}
+.fill{/* Fill up Book Details */
+
+    position: absolute;
+    width: 334px;
+    height: 33px;
+    left: 40px;
+    top: 30px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 128.52%;
+    /* or 26px */
+    
+    color: #000000;
+    
+    }
+    .name input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .box {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+    
+    .fill {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    

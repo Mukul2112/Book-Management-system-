@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Tracker Registration</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        position: relative;
+        height: 100vh;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom right, #26A96C, #395E66);
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+        z-index: -1;
+
+    }
+
+    .background::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        top: 0;
+        left: 0;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom right, #3cb46e 50%, #ffffff 50%);
+        clip-path: ellipse(100% 100% at 0% 0%);
+        z-index: -1;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        z-index: 1;
+    }
+
+    .registration-form {
+        text-align: center;
+    }
+
+    .logo img {
+        width: 50px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        margin-bottom: 5px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+    }
+
+    .btn {
+        width: 100%;
+        background-color: #28a745;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #218838;
+    }
+
+    .footer {
+        margin-top: 20px;
+    }
+
+    .footer p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .footer a {
+        color: #28a745;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        .form-group input {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .footer p {
+            font-size: 12px;
+        }
+    }
+</style>
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="registration-form">
+            <div class="logo">
+                <img src="/images/logo.jpeg" alt="Library Tracker Logo">
+            </div>
+            <h2>Registration</h2>
+            <p>For Both Staff & Students</p>
+
+            <form id="registrationForm" method="post" action="/register">
+                <div class="form-group">
+                    <label for="regNo">Reg No.</label>
+                    <input type="number" name="regNo" id="regNo" placeholder="College Reg. No." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">College Email ID</label>
+                    <input type="email" name="email" id="email" placeholder="username@collegename.ac.in" >
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                </div>
+                
+               <button type="submit" class="btn">Register</button>
+            </form>
+            <div class="footer">
+                <p>Already a User? <a href="/page1">Login now</a></p>
+                <p><a href="/home">Use as Guest</a></p>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
